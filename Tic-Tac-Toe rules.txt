@@ -1,0 +1,47 @@
+Project Proposal:
+
+Pygame Tic-Tac-Toe with graphics
+
+win condition:
+
+3 X's or 3 O's in a row
+
+P1: 1		     P2: 0
+
+        |       |
+        |   O   |
+        |       |
+__________________________
+        |       |
+        |   O   |
+        |       |
+__________________________
+        |       |
+        |   O   |
+        |       |
+
+--------------------------
+
+P1: 0		     P2: 1
+
+        |       |
+    X   |       |
+        |       |
+__________________________
+        |       |
+        |   X   |
+        |       |
+__________________________
+        |       |
+        |       |    X
+        |       |
+
+rules:
+	1) Two Players: X and O
+	2) Players take turns placing down their respective marking (X or O).
+	3) Players may only mark on empty spaces
+	4) If 3 of same marking, player wins
+	5) If no spaces empty, return 'Stalemate!'
+	6) After round ends, show prompt asking for 'enter' if continue to next round, or 'esc' to end game
+	7) Before exiting, display player with greater score as victorious
+	8) Wipe board after each round, however maintain scoreboard at top of screen.
