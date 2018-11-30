@@ -36,6 +36,22 @@ __________________________
         |       |    X
         |       |
 
+
+Board Layout:
+
+        |       |
+    1   |   2   |   3
+        |       |
+__________________________
+        |       |
+    4   |   5   |   6
+        |       |
+__________________________
+        |       |
+    7   |   8   |   9
+        |       |
+
+
 rules:
 	1) Two Players: X and O
 	2) Players take turns placing down their respective marking (X or O).
