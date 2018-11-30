@@ -8,32 +8,32 @@ from pygame.locals import *
 
 def place_mark(turn, grid):
     #checks mouse position, determining which section of the grid that mark was placed
-    if pygame.mouse.get_pos()[0] < 234 and pygame.mouse.get_pos()[1]<234 and grid[0][0] == 0:
-        grid[0][0] = turn
+    if pygame.mouse.get_pos()[0] < 234 and pygame.mouse.get_pos()[1]<234 and grid[0] == 0:
+        grid[0] = turn
         return grid
-    elif 234< pygame.mouse.get_pos()[0] < 468 and pygame.mouse.get_pos()[1]<234 and grid[0][1] == 0:
-        grid[0][1] = turn
+    elif 234< pygame.mouse.get_pos()[0] < 468 and pygame.mouse.get_pos()[1]<234 and grid[1] == 0:
+        grid[1] = turn
         return grid
-    elif 468< pygame.mouse.get_pos()[0] and pygame.mouse.get_pos()[1]<234 and grid[0][2] == 0:
-        grid[0][2] = turn
+    elif 468< pygame.mouse.get_pos()[0] and pygame.mouse.get_pos()[1]<234 and grid[2] == 0:
+        grid[2] = turn
         return grid
-    elif pygame.mouse.get_pos()[0] < 234 and 234<pygame.mouse.get_pos()[1]<468 and grid[1][0] == 0:
-        grid[1][0] = turn
+    elif pygame.mouse.get_pos()[0] < 234 and 234<pygame.mouse.get_pos()[1]<468 and grid[3] == 0:
+        grid[3] = turn
         return grid
-    elif 234< pygame.mouse.get_pos()[0] < 468 and 234<pygame.mouse.get_pos()[1]<468 and grid[1][1] == 0:
-        grid[1][1] = turn
+    elif 234< pygame.mouse.get_pos()[0] < 468 and 234<pygame.mouse.get_pos()[1]<468 and grid[4] == 0:
+        grid[4] = turn
         return grid
-    elif 468< pygame.mouse.get_pos()[0] and 234<pygame.mouse.get_pos()[1]<468 and grid[1][2] == 0:
-        grid[1][2] = turn
+    elif 468< pygame.mouse.get_pos()[0] and 234<pygame.mouse.get_pos()[1]<468 and grid[5] == 0:
+        grid[5] = turn
         return grid
-    elif pygame.mouse.get_pos()[0] < 234 and 468<pygame.mouse.get_pos()[1] and grid[2][0] == 0:
-        grid[2][0] = turn
+    elif pygame.mouse.get_pos()[0] < 234 and 468<pygame.mouse.get_pos()[1] and grid[6] == 0:
+        grid[6] = turn
         return grid
-    elif 234< pygame.mouse.get_pos()[0] < 468 and 468<pygame.mouse.get_pos()[1] and grid[2][1] == 0:
-        grid[2][1] = turn
+    elif 234< pygame.mouse.get_pos()[0] < 468 and 468<pygame.mouse.get_pos()[1] and grid[7] == 0:
+        grid[7] = turn
         return grid
-    elif 468< pygame.mouse.get_pos()[0] and 468<pygame.mouse.get_pos()[1] and grid[2][2] == 0:
-        grid[2][2] = turn
+    elif 468< pygame.mouse.get_pos()[0] and 468<pygame.mouse.get_pos()[1] and grid[8] == 0:
+        grid[8] = turn
         return grid
     return grid
 
@@ -111,6 +111,17 @@ def run():
             if event.type == MOUSEBUTTONDOWN:
                 matrix = place_mark(curr_turn, matrix)
                 place_mark(curr_turn,matrix)
+
+                for i in range(9):
+                    if matrix[i] == 'O':
+                        img = "Letter-X.png"
+                        c = pygame.image.load(img).convert_alpha()
+                    if matrix[i] == 'X':
+                        img = "Circle.png"
+                        c = pygame.image.load(img).convert_alpha()
+                    display.blit(c, draw_mark(i))
+
+
                 if curr_turn == 'O':
                     curr_turn = 'X'
                 else:
@@ -142,8 +153,6 @@ def dis():
 
     display.blit(c,(x,y))
 
-
-
     display.blit(c, draw_mark(get_position()))
 
     pygame.image.save(display, 'screen.png')
@@ -171,7 +180,7 @@ def main():
         pygame.draw.line(display, (0,0,0), (234*i,0), (234*i,702), 3)
 
     # [[None, None, None],[None, None, None],[None, None, None]]
-    matrix = [[0,0,0], [0,0,0], [0,0,0]]
+    matrix = [0,0,0,0,0,0,0,0,0]
 
     curr_turn = 'O'
     pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
