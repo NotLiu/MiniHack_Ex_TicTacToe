@@ -16,8 +16,12 @@ def run():
 
     display.fill((255, 255, 255))
     pygame.display.update()
+    eraser = False
     while True: #run game
-        img = 'Brush.png'
+        if eraser:
+            img = 'Eraser.png'
+        else:
+            img = 'Brush.png'
         c = pygame.image.load(img).convert_alpha()
         x, y = pygame.mouse.get_pos()
         x -= c.get_width() / 2
@@ -28,9 +32,10 @@ def run():
                 sys.exit()
             if event.type == MOUSEBUTTONDOWN:
                 pygame.mouse.set_cursor((16, 7), (10, 3), (4064, 49155, 14392, 28686, 28686, 14392, 49155, 4064, 28686, 14392, 14392, 28686, 49155, 49155),(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
-
+                eraser = True
             if event.type == MOUSEBUTTONUP:
                 pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
+                eraser = False
             if event.type == KEYDOWN:
                 display.fill((255, 255, 255))
         display.blit(c, (x, y))
