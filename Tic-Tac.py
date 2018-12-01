@@ -97,6 +97,7 @@ def run():
     global c
     global img
     global matrix
+    global victor
     while True: #run game
         if curr_turn == 'O':
             img = "Letter-X.png"
@@ -110,8 +111,14 @@ def run():
                 sys.exit()
             if event.type == MOUSEBUTTONDOWN:
                 matrix = place_mark(curr_turn, matrix)
-                place_mark(curr_turn,matrix)
+                if curr_turn == 'O':
+                    curr_turn = 'X'
+                else:
+                    curr_turn = 'O'
 
+                #place_mark(curr_turn,matrix)
+
+                '''
                 for i in range(9):
                     if matrix[i] == 'O':
                         img = "Letter-X.png"
@@ -120,12 +127,38 @@ def run():
                         img = "Circle.png"
                         c = pygame.image.load(img).convert_alpha()
                     display.blit(c, draw_mark(i))
+                '''
 
 
-                if curr_turn == 'O':
-                    curr_turn = 'X'
-                else:
-                    curr_turn = 'O'
+        print(matrix)
+        '''
+        for i in range(9):
+            print(matrix)
+            if matrix[i] == 'X':
+                img = 'Letter-X.png'
+                c = pygame.image.load(img).convert_alpha()
+                display.blit(c, draw_mark(i))
+            if matrix[i] == 'O':
+                img = 'Circle.png'
+                c = pygame.image.load(img).convert_alpha()
+                display.blit(c, draw_mark(i))
+        '''
+
+        for i in range(3):
+            if matrix[i*3] == matrix[i*3+1] == matrix[i*3+2]:
+                #horizontal lines
+                victor = matrix[i*3]
+            if matrix[i] == matrix[i+3] == matrix[i+6]:
+                #vertical lines
+                victor = matrix[i]
+            if matrix[0] == matrix[4] == matrix[8]:
+                #diagonal lines
+                victor = matrix[0]
+            if matrix[2] == matrix[4] == matrix[6]:
+                # diagonal lines
+                victor = matrix[2]
+        if victor == 'X' or victor == 'O':
+            print('The victor is...',victor,'!')
 
         dis()
 
@@ -141,6 +174,7 @@ def dis():
     global img
     global curr_turn
     global matrix
+    global victor
     display.fill((255,255,255))
     for i in range(4)[1:]:
         pygame.draw.line(display, (0, 0, 0), (0, 234 * i), (702, 234 * i), 3)
@@ -148,15 +182,24 @@ def dis():
     x,y = pygame.mouse.get_pos()
     x -= c.get_width()/2
     y -= c.get_height()/2
-    place_mark(curr_turn,matrix)
+    #place_mark(curr_turn,matrix)
 
+    for i in range(9):
+        print(matrix)
+        if matrix[i] == 'X':
+            img = 'Letter-X.png'
+            c = pygame.image.load(img).convert_alpha()
+            display.blit(c, draw_mark(i+1))
+        if matrix[i] == 'O':
+            img = 'Circle.png'
+            c = pygame.image.load(img).convert_alpha()
+            display.blit(c, draw_mark(i+1))
 
-    display.blit(c,(x,y))
+    d = pygame.image.load('Brush.png').convert_alpha()
+    display.blit(d,(x,y))
 
-    display.blit(c, draw_mark(get_position()))
-
-    pygame.image.save(display, 'screen.png')
-    display.blit(display, (0,0))
+    #pygame.image.save(display, 'screen.png')
+    #display.blit(display, (0,0))
     pygame.display.update()
 
 
@@ -175,6 +218,7 @@ def main():
 
     # draw grid
 
+
     for i in range(4)[1:]:
         pygame.draw.line(display, (0,0,0), (0,234*i), (702,234*i), 3)
         pygame.draw.line(display, (0,0,0), (234*i,0), (234*i,702), 3)
@@ -184,6 +228,8 @@ def main():
 
     curr_turn = 'O'
     pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
+
+    victor = ''
 
     run()
 
