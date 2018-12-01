@@ -150,15 +150,19 @@ def run():
             if matrix[i*3] == matrix[i*3+1] == matrix[i*3+2] and matrix[i*3] != 0:
                 #horizontal lines
                 victor = matrix[i*3]
+                end = True
             if matrix[i] == matrix[i+3] == matrix[i+6] and matrix[i] != 0:
                 #vertical lines
                 victor = matrix[i]
+                end = True
             if matrix[0] == matrix[4] == matrix[8] and matrix[0] != 0:
                 #diagonal lines
                 victor = matrix[0]
+                end = True
             if matrix[2] == matrix[4] == matrix[6] and matrix[2] != 0:
                 # diagonal lines
                 victor = matrix[2]
+                end = True
 
 
 
@@ -207,7 +211,7 @@ def dis():
     #display.blit(display, (0,0))
     pygame.display.update()
 
-    if victor == 'X' or victor == 'O' and 0 not in matrix:
+    if victor == 'X' or victor == 'O' and end == True:
         print('The victor is...', victor, '!')
         time.sleep(1)
         pygame.quit()
