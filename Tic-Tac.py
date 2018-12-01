@@ -5,6 +5,7 @@
 
 import pygame, sys
 from pygame.locals import *
+import time
 
 def place_mark(turn, grid):
     #checks mouse position, determining which section of the grid that mark was placed
@@ -98,6 +99,7 @@ def run():
     global img
     global matrix
     global victor
+    global end
     while True: #run game
         if curr_turn == 'O':
             img = "Letter-X.png"
@@ -145,20 +147,22 @@ def run():
         '''
 
         for i in range(3):
-            if matrix[i*3] == matrix[i*3+1] == matrix[i*3+2]:
+            if matrix[i*3] == matrix[i*3+1] == matrix[i*3+2] and matrix[i*3] != 0:
                 #horizontal lines
                 victor = matrix[i*3]
-            if matrix[i] == matrix[i+3] == matrix[i+6]:
+            if matrix[i] == matrix[i+3] == matrix[i+6] and matrix[i] != 0:
                 #vertical lines
                 victor = matrix[i]
-            if matrix[0] == matrix[4] == matrix[8]:
+            if matrix[0] == matrix[4] == matrix[8] and matrix[0] != 0:
                 #diagonal lines
                 victor = matrix[0]
-            if matrix[2] == matrix[4] == matrix[6]:
+            if matrix[2] == matrix[4] == matrix[6] and matrix[2] != 0:
                 # diagonal lines
                 victor = matrix[2]
-        if victor == 'X' or victor == 'O':
-            print('The victor is...',victor,'!')
+
+
+
+
 
         dis()
 
@@ -175,6 +179,7 @@ def dis():
     global curr_turn
     global matrix
     global victor
+    global end
     display.fill((255,255,255))
     for i in range(4)[1:]:
         pygame.draw.line(display, (0, 0, 0), (0, 234 * i), (702, 234 * i), 3)
@@ -202,6 +207,17 @@ def dis():
     #display.blit(display, (0,0))
     pygame.display.update()
 
+    if victor == 'X' or victor == 'O' and 0 not in matrix:
+        print('The victor is...', victor, '!')
+        time.sleep(1)
+        pygame.quit()
+        sys.exit()
+    elif 0 not in matrix:
+        print('STALEMATE!')
+        time.sleep(1)
+        pygame.quit()
+        sys.exit()
+
 
 def main():
     # display board
@@ -209,6 +225,8 @@ def main():
     global display
     global curr_turn
     global matrix
+    global end
+    global victor
 
     pygame.init()
 
@@ -230,6 +248,7 @@ def main():
     pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
 
     victor = ''
+    end = False
 
     run()
 
