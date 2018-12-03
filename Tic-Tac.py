@@ -122,17 +122,6 @@ def run():
 
                 #place_mark(curr_turn,matrix)
 
-                '''
-                for i in range(9):
-                    if matrix[i] == 'O':
-                        img = "Letter-X.png"
-                        c = pygame.image.load(img).convert_alpha()
-                    if matrix[i] == 'X':
-                        img = "Circle.png"
-                        c = pygame.image.load(img).convert_alpha()
-                    display.blit(c, draw_mark(i))
-                '''
-
 
         print(matrix)
         '''
