@@ -28,15 +28,19 @@ def run():
         y -= c.get_height() / 2
         for event in pygame.event.get():
             if event.type == QUIT:
+                print('GAME QUIT')
                 pygame.quit()
                 sys.exit()
             if event.type == MOUSEBUTTONDOWN:
+                print('ERASE')
                 pygame.mouse.set_cursor((16, 7), (10, 3), (4064, 49155, 14392, 28686, 28686, 14392, 49155, 4064, 28686, 14392, 14392, 28686, 49155, 49155),(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
                 eraser = True
             if event.type == MOUSEBUTTONUP:
+                print('DRAW')
                 pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
                 eraser = False
             if event.type == KEYDOWN:
+                print('SCREEN CLEAR')
                 display.fill((255, 255, 255))
         display.blit(c, (x, y))
         dis()
