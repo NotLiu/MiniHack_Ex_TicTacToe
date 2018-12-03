@@ -109,13 +109,15 @@ def run():
             c = pygame.image.load(img).convert_alpha()
         for event in pygame.event.get():
             if event.type == QUIT:
+                print('GAME QUIT')
                 pygame.quit()
                 sys.exit()
             if event.type == MOUSEBUTTONDOWN:
+                check = matrix[:]
                 matrix = place_mark(curr_turn, matrix)
-                if curr_turn == 'O':
+                if curr_turn == 'O' and check != matrix:
                     curr_turn = 'X'
-                else:
+                elif curr_turn == 'X' and check != matrix:
                     curr_turn = 'O'
 
                 #place_mark(curr_turn,matrix)
